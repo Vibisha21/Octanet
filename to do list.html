@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -39,40 +40,71 @@
 
         .input-container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             margin-bottom: 20px;
         }
 
         #new-task {
-            flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             outline: none;
             transition: border-color 0.3s;
+            margin-bottom: 10px;
         }
 
         #new-task:focus {
             border-color: #007BFF;
         }
 
-        #add-task-button {
+        .due-date-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .due-date-label {
+            margin-right: 10px;
+            color: #333;
+        }
+
+        #due-date {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+            flex: 1;
+        }
+
+        #select-due-date-button, #add-task-button {
             padding: 10px;
             border: none;
-            background-color: #007BFF;
             color: white;
             border-radius: 5px;
-            margin-left: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        #add-task-button:hover {
+        #select-due-date-button {
+            background-color: #007BFF;
+        }
+
+        #select-due-date-button:hover {
             background-color: #0056b3;
+        }
+
+        #add-task-button {
+            background-color: #28a745;
+        }
+
+        #add-task-button:hover {
+            background-color: #218838;
         }
 
         #task-list {
             list-style-type: none;
+            padding: 0;
         }
 
         .task-item {
@@ -92,7 +124,7 @@
         }
 
         .delete-button {
-            background-color: #e74c3c;
+            background-color: #dc3545;
             border: none;
             color: white;
             padding: 5px 10px;
@@ -102,7 +134,7 @@
         }
 
         .delete-button:hover {
-            background-color: #10b842;
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -111,16 +143,29 @@
         <h1>To-Do List</h1>
         <div class="input-container">
             <input type="text" id="new-task" placeholder="Add a new task...">
-            <button id="add-task-button">Add</button>
+            <div class="due-date-container">
+                <label for="due-date" class="due-date-label">Due Date:</label>
+                <input type="text" id="due-date" class="flatpickr-input" readonly>
+                <button id="select-due-date-button">Select Date</button>
+            </div>
+            <button id="add-task-button">Add Task</button>
         </div>
         <ul id="task-list"></ul>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
+        flatpickr("#due-date", {
+            dateFormat: "Y-m-d",
+            disableMobile: true, // Optional
+        });
+
         document.getElementById('add-task-button').addEventListener('click', function() {
             var taskInput = document.getElementById('new-task');
             var taskText = taskInput.value.trim();
+            var dueDateInput = document.getElementById('due-date').value;
 
-            if (taskText !== "") {
+            if (taskText !== "" && dueDateInput !== "") {
                 var taskList = document.getElementById('task-list');
 
                 var taskItem = document.createElement('li');
@@ -128,6 +173,11 @@
 
                 var taskContent = document.createElement('span');
                 taskContent.textContent = taskText;
+
+                var taskDueDate = document.createElement('span');
+                taskDueDate.textContent = dueDateInput;
+                taskDueDate.style.marginLeft = '10px';
+                taskDueDate.style.color = '#777';
 
                 var deleteButton = document.createElement('button');
                 deleteButton.className = 'delete-button';
@@ -137,11 +187,37 @@
                 });
 
                 taskItem.appendChild(taskContent);
+                taskItem.appendChild(taskDueDate);
                 taskItem.appendChild(deleteButton);
-                taskList.appendChild(taskItem);
+
+                // Add task to the correct position based on due date
+                var tasks = Array.from(taskList.children);
+                var dueDate = new Date(dueDateInput);
+                var index = tasks.findIndex(task => {
+                    var taskDueDateText = task.querySelector('span:nth-child(2)').textContent;
+                    var taskDueDate = new Date(taskDueDateText);
+                    return dueDate < taskDueDate;
+                });
+
+                if (index === -1) {
+                    taskList.appendChild(taskItem); // If no earlier task, append at the end
+                } else {
+                    taskList.insertBefore(taskItem, tasks[index]); // Insert before the found index
+                }
 
                 taskInput.value = "";
+                document.getElementById('due-date')._flatpickr.clear(); // Clear selected date
                 taskInput.focus();
+            } else {
+                alert("Please fill in both the task and due date fields.");
+            }
+        });
+
+        document.getElementById('select-due-date-button').addEventListener('click', function() {
+            var selectedDateField = document.getElementById('due-date');
+            var dueDate = prompt("Enter due date (YYYY-MM-DD):");
+            if (dueDate) {
+                selectedDateField.value = dueDate;
             }
         });
     </script>
