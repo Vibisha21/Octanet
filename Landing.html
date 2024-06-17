@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Bakery</title>
+    <style>
+        body {
+            font-family:Verdana,Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e1cece;
+        
+        }
+        header {
+            background-color: #824730;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration:solid;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+        nav a:hover {
+            color: #333333;
+        }
+        .banner {
+            background-image: url('bakery_banner.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.971);
+            margin-bottom: 20px;
+        }
+        .banner h1 {
+            font-size:60px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 10px;
+            font-size: 30px;
+        }
+        .section p {
+            line-height: 1.6;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 20px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .menu-item img {
+            width: 200px;
+            height: 200px;
+            margin-right: 50px;
+        }
+        .menu-item:hover img {
+            transform: scale(1.1);
+        }
+        footer {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="font-family:'Times New Roman', Times, serif;" style="text-size-adjust:var(1200px);"> BAKED TREATS </h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <h1 style="color: #752719;">Welcome to Baked Treats!</h1>
+    </div>
+
+    <div class="container">
+        <section id="about" class="section">
+            <h2 >About Us</h2>
+            <p><b><i>Welcome to Baked Treats! We are passionate about baking delicious treats. From cakes to pastries, we offer a wide variety of freshly baked goods to satisfy your cravings. To make your speacial day even more special, Contact us!</i></b></p>
+        </section>
+
+        <section id="menu" class="section">
+            <h2>Our Menu</h2>
+            <div class="menu-item">
+                <img src=C:\Users\vibis\OneDrive\Documents\OctaNet\cake.webp alt="Cake">
+                <div class="menu-item-details">
+                    <h3>Cake</h3>
+                    <p><b>Indulge in our delectable cakes, baked fresh daily with the finest ingredients.</b></p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src=C:\Users\vibis\OneDrive\Documents\OctaNet\pastry.jpg alt="Pastry">
+                <div class="menu-item-details">
+                    <h3>Pastry</h3>
+                    <p><b>Try our flaky pastries filled with sweet or savory fillings, perfect for any time of the day.</b></p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src=C:\Users\vibis\OneDrive\Documents\OctaNet\puffs.JPG alt="Puffs">
+                <div class="menu-item-details">
+                    <h3>Puffs</h3>
+                    <p><b>Savor our delectable puffs, packed with sweet or savory fillings, ideal for enjoying at any time of the day.</b></p>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src=C:\Users\vibis\OneDrive\Documents\OctaNet\cookies.jpeg alt="Cookies">
+                <div class="menu-item-details">
+                    <h3>Cookies</h3>
+                    <p><b>Enjoy our scrumptious cookies, available in a variety of sweet flavors, perfect for any time of the day.</b></p>
+                </div>
+            </div>
+            <!-- Add more menu items here -->
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <p>Have a question or want to place an order? Contact us using the information below:</p>
+            <p>Email: bakedtreats@gmail.com<br>
+               Phone: 9876543210<br>
+               Address: 123 Bakery Street, Coimbatore, Tamil Nadu, India</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Delicious Bakery. All rights reserved.</p>
+    </footer>
+</body>
+</html>
